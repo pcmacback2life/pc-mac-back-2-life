@@ -1,3 +1,14 @@
+<style id="ss1-style">
+/* Force single-line scrolling strip regardless of parent/grid styles */
+#ss1{position:relative;width:100%;overflow:hidden;padding:.5rem 0;display:block !important}
+#ss1 .track{display:flex !important;flex-wrap:nowrap !important;gap:1rem;will-change:transform;animation:ss1-move 40s linear infinite}
+#ss1:hover .track{animation-play-state:paused}
+#ss1 a{flex:0 0 auto !important;display:inline-block !important}
+#ss1 img{height:120px !important;width:auto !important;display:block;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+@keyframes ss1-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){#ss1 .track{animation:none}}
+@media (max-width:600px){#ss1 img{height:90px !important}}
+</style>
 <style>
 /* Scrolling screenshot strip (single line) */
 .ssstrip{position:relative;width:100%;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(0,0,0,.08);border-bottom:1px solid rgba(0,0,0,.08);padding:.5rem 0}
@@ -740,6 +751,21 @@
   <h2 class="shots__title">Screenshots</h2>
 
 <!-- Scrolling Screenshots: single-line, seamless, clickable -->
+<!-- Forced single-line scrolling screenshots (scoped, clickable) -->
+<div id="ss1" aria-label="Scrolling screenshots">
+  <div class="track">
+    <!-- sequence A -->
+    <a class="item" href="screenshots/screenshot4.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot4.jpg" alt="Screenshot 4"></a>
+    <a class="item" href="screenshots/screenshot9.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot9.jpg" alt="Screenshot 9"></a>
+    <a class="item" href="screenshots/screenshot2.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot2.jpeg" alt="Screenshot 2"></a>
+    <a class="item" href="screenshots/screenshot5.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot5.jpeg" alt="Screenshot 5"></a>
+    <!-- sequence B (exact duplicate of A for seamless loop) -->
+    <a class="item" href="screenshots/screenshot4.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot4.jpg" alt="Screenshot 4"></a>
+    <a class="item" href="screenshots/screenshot9.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot9.jpg" alt="Screenshot 9"></a>
+    <a class="item" href="screenshots/screenshot2.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot2.jpeg" alt="Screenshot 2"></a>
+    <a class="item" href="screenshots/screenshot5.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot5.jpeg" alt="Screenshot 5"></a>
+  </div>
+</div>
 <div class="ssstrip" aria-label="Scrolling screenshots">
   <div class="ssstrip__track">
     <!-- sequence A -->
