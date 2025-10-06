@@ -949,3 +949,32 @@ img[src$="cta.html"] { display: none !important; }
   }catch(e){}
 })();
 </script>
+<script id="kill-old-header-logo">
+(function(){
+  // Prefer the explicit hero logo; fall back to the scroller iframe
+  var hero = document.getElementById('hero-logo') || document.getElementById('screenshots-strip');
+  if (!hero) return;
+
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('img'));
+  for (var i=0; i<imgs.length; i++){
+    var img = imgs[i];
+
+    // Skip the new hero logo block entirely
+    if (img.closest && img.closest('#hero-logo')) continue;
+
+    // Only consider images that appear BEFORE hero in the DOM
+    // (hero follows the old header image)
+    if ((img.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING) === 0) continue;
+
+    // Skip screenshot thumbnails and the new assets/logo.png
+    var src = (img.currentSrc || img.src || '').toLowerCase();
+    if (src.indexOf('/screenshots/') !== -1) continue;
+    if (src.indexOf('assets/logo.png') !== -1) continue;
+
+    // Hide the most reasonable container so spacing collapses nicely
+    var container = (img.closest && img.closest('header, .site-header, .header, .logo, .brand, a, div, section')) || img;
+    container.style.setProperty('display','none','important');
+    break; // only the first one
+  }
+})();
+</script>
