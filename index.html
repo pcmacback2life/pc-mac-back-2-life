@@ -754,68 +754,6 @@
     <a class="ssstrip__item" href="screenshots/screenshot5.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot5.jpeg" alt="Screenshot 5"></a>
   </div>
 </div>
-  <div class="marquee" aria-label="Scrolling screenshots">
-    <div class="marquee__track">
-    <a class="marquee__item" href="screenshots/screenshot4.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot4.jpg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot9.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot9.jpg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot2.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot2.jpeg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot5.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot5.jpeg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot1.png" target="_blank" rel="noopener"><img src="screenshots/screenshot1.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot10.png" target="_blank" rel="noopener"><img src="screenshots/screenshot10.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot11.png" target="_blank" rel="noopener"><img src="screenshots/screenshot11.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot12.png" target="_blank" rel="noopener"><img src="screenshots/screenshot12.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot3.png" target="_blank" rel="noopener"><img src="screenshots/screenshot3.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot6.png" target="_blank" rel="noopener"><img src="screenshots/screenshot6.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot7.png" target="_blank" rel="noopener"><img src="screenshots/screenshot7.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot8.png" target="_blank" rel="noopener"><img src="screenshots/screenshot8.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot4.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot4.jpg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot9.jpg" target="_blank" rel="noopener"><img src="screenshots/screenshot9.jpg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot2.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot2.jpeg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot5.jpeg" target="_blank" rel="noopener"><img src="screenshots/screenshot5.jpeg" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot1.png" target="_blank" rel="noopener"><img src="screenshots/screenshot1.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot10.png" target="_blank" rel="noopener"><img src="screenshots/screenshot10.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot11.png" target="_blank" rel="noopener"><img src="screenshots/screenshot11.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot12.png" target="_blank" rel="noopener"><img src="screenshots/screenshot12.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot3.png" target="_blank" rel="noopener"><img src="screenshots/screenshot3.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot6.png" target="_blank" rel="noopener"><img src="screenshots/screenshot6.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot7.png" target="_blank" rel="noopener"><img src="screenshots/screenshot7.png" alt=""></a>
-    <a class="marquee__item" href="screenshots/screenshot8.png" target="_blank" rel="noopener"><img src="screenshots/screenshot8.png" alt=""></a>
-      <!-- One full set -->
-      <a class="shot" href="#">
-        <img src="images/screenshot1.jpg" alt="This PC does not meet Windows 11 requirements">
-        <span class="shot__caption">This PC does not meet Windows 11 requirements</span>
-      </a>
-      <a class="shot" href="#">
-        <img src="images/screenshot2.jpg" alt="Zoom is native on Zorin">
-        <span class="shot__caption">Zoom is native on Zorin</span>
-      </a>
-      <a class="shot" href="#">
-        <img src="images/screenshot3.jpg" alt="Stacer monitors system vitals">
-        <span class="shot__caption">Stacer monitors system vitals</span>
-      </a>
-      <a class="shot" href="#">
-        <img src="images/screenshot4.jpg" alt="VLC plays all common codecs">
-        <span class="shot__caption">VLC plays all common codecs</span>
-      </a>
-
-      <!-- Duplicate for seamless scroll -->
-      <a class="shot" href="#">
-        <img src="images/screenshot1.jpg" alt="Duplicate: This PC does not meet Windows 11 requirements">
-        <span class="shot__caption">This PC does not meet Windows 11 requirements</span>
-      </a>
-      <a class="shot" href="#">
-        <img src="images/screenshot2.jpg" alt="Duplicate: Zoom is native on Zorin">
-        <span class="shot__caption">Zoom is native on Zorin</span>
-      </a>
-      <a class="shot" href="#">
-        <img src="images/screenshot3.jpg" alt="Duplicate: Stacer monitors system vitals">
-        <span class="shot__caption">Stacer monitors system vitals</span>
-      </a>
-      <a class="shot" href="#">
-        <img src="images/screenshot4.jpg" alt="Duplicate: VLC plays all common codecs">
-        <span class="shot__caption">VLC plays all common codecs</span>
-      </a>
-    </div>
   </div>
 </section>
 
@@ -830,18 +768,13 @@
   .shots { padding: 1rem 0; }
   .shots__title { margin: 0 0 .5rem; font-size: 1.4rem; }
 
-  .marquee { position: relative; overflow: hidden; width: 100%; }
-  .marquee__track {
     display: flex;
     gap: var(--shot-gap);
     will-change: transform;
     animation: scroll-left var(--scroll-duration) linear infinite;
   }
-  .marquee:hover .marquee__track,
-  .marquee:focus-within .marquee__track { animation-play-state: paused; }
 
   @media (prefers-reduced-motion: reduce) {
-    .marquee__track { animation: none; }
   }
 
   .shot {
