@@ -57,6 +57,65 @@
     <div class="logoTile" title="Logo"></div>
 <div id="after-logo-anchor"></div>
 <!-- BEGIN: isolated CTA + scroller -->
+<!-- hide-legacy-logo 20251006-174628 -->
+</div>
+<style>
+@keyframes ss1-move { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+</style>
+<style id="ss1-style">
+/* Force single-line scrolling strip regardless of parent/grid styles */
+#ss1{position:relative;width:100%;overflow:hidden;padding:.5rem 0;display:block !important}
+#ss1 .track{display:flex !important;flex-wrap:nowrap !important;gap:1rem;will-change:transform;animation:ss1-move 40s linear infinite}
+#ss1:hover .track{animation-play-state:paused}
+#ss1 a{flex:0 0 auto !important;display:inline-block !important}
+#ss1 img{height:140px !important;width:auto !important;display:block;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+@keyframes ss1-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){#ss1 .track{animation:none}}
+@media (max-width:600px){#ss1 img{height:90px !important}}
+</style>
+<style>
+/* Scrolling screenshot strip (single line) */
+.ssstrip{position:relative;width:100%;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(0,0,0,.08);border-bottom:1px solid rgba(0,0,0,.08);padding:.5rem 0}
+.ssstrip__track{display:inline-block;will-change:transform;animation:ss-move 40s linear infinite}
+.ssstrip:hover .ssstrip__track{animation-play-state:paused}
+.ssstrip__item{display:inline-block;margin-right:1rem}
+.ssstrip__item img{height:140px;width:auto;vertical-align:middle;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+/* Seamless loop: two identical sequences; translate exactly -50% */
+@keyframes ss-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){.ssstrip__track{animation:none}}
+@media (max-width:600px){.ssstrip__item img{height:90px}}
+</style>
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PC • Mac • Back 2 Life</title>
+
+<style>
+  :root{--bg:#0b1220;--text:#e5e7eb;--muted:#9ca3af;--brand:#22d3ee}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:20px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;margin:14px 0}
+  .muted{color:var(--muted)}
+  .logoTile{width:min(220px,42vw);height:min(220px,42vw);margin:0 auto 10px;border-radius:18px;border:1px solid rgba(255,255,255,.15);
+            background:#0a1020 center/contain no-repeat url('https://pcmacback2life.github.io/pc-mac-back-2-life/images/logo.png?v=1758645046')}
+  .shots{display:flex;flex-wrap:wrap;gap:12px}
+  .shot{flex:1 1 220px;max-width:260px;margin:0}
+  .shot a{display:block;border:1px solid rgba(255,255,255,.15);border-radius:10px;overflow:hidden;cursor:zoom-in}
+  .shot img{display:block;width:100%;height:auto}
+  #viewer{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.88);z-index:9999}
+  #viewer img{max-width:95%;max-height:90%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  #viewer .close{position:absolute;top:14px;right:14px;font-size:22px;padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;cursor:pointer}
+</style>
+
+<div class="wrap">
+  
+
+  <!-- Brand -->
+  <section class="card" style="text-align:center">
+    <div class="logoTile" title="Logo"></div>
+<div id="after-logo-anchor"></div>
+<!-- BEGIN: isolated CTA + scroller -->
   <div id="hero-logo" style="display:flex;justify-content:center;align-items:center;margin:12px 0;">
     <img src="assets/logo.png?v=20251006-172718" alt="PC-Mac-Back-2-Life Logo" style="max-width:92vw;max-height:200px;height:auto;display:block;">
   </div>
