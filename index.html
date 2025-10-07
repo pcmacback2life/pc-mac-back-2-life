@@ -1,3 +1,23 @@
+<!-- LOGO_FIX v1 -->
+<style id="logo-fix">
+  /* Keep ONLY the new logo file visible */
+  img[src*="assets/logo.png"] { display:inline-block !important; }
+
+  /* Hide any other images that look like a logo anywhere on the page */
+  header img:not([src*="assets/logo.png"]),
+  .site-header img:not([src*="assets/logo.png"]),
+  #header img:not([src*="assets/logo.png"]),
+  .top img:not([src*="assets/logo.png"]),
+  img[src*="logo"]:not([src*="assets/logo.png"]),
+  picture img[src*="logo"]:not([src*="assets/logo.png"]),
+  body > img:first-of-type:not([src*="assets/logo.png"]) {
+    display: none !important;
+  }
+
+  /* Make sure the keeper logo and Tech Support button look right */
+  #hero-logo { display:block !important; margin:10px auto !important; max-height:110px !important; }
+  .btn-support-wrap { width:100% !important; display:flex !important; justify-content:center !important; margin:12px 0 18px !important; }
+</style>
 <style id="clean-logos-style">
   /* Hide any image that looks like a logo BUT is not the keeper (#hero-logo / assets/logo.png) */
   img[src*="logo"]:not([src*="assets/logo.png"]):not(#hero-logo) { display: none !important; }
