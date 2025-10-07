@@ -1032,3 +1032,23 @@ document.addEventListener('DOMContentLoaded',function(){
   }catch(e){}
 });
 </script>
+<script id="kill-old-logos-v2">
+document.addEventListener('DOMContentLoaded',function(){
+  try{
+    var hero = document.getElementById('hero-logo');
+    if(!hero) return;
+    document.querySelectorAll('img').forEach(function(img){
+      if(img===hero) return;
+      var s = (img.currentSrc||img.src||'').toLowerCase();
+      if(!s) return;
+      if(s.indexOf('/screenshots/')!==-1) return;   // keep gallery
+      if(s.indexOf('assets/logo.png')!==-1) return; // keep new logo
+      // If this image is before the hero in DOM order, remove its nearest wrapper
+      if (hero.compareDocumentPosition(img) & Node.DOCUMENT_POSITION_PRECEDING){
+        var wrap = img.closest('a,picture,figure,header,div,section') || img;
+        if(wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+      }
+    });
+  }catch(e){}
+});
+</script>
