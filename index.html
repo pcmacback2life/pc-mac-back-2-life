@@ -1048,3 +1048,59 @@ document.addEventListener('DOMContentLoaded',function(){
   }catch(e){}
 });
 </script>
+<script id="fix-logos-and-button">
+document.addEventListener('DOMContentLoaded', function(){
+  try{
+    var hero = document.getElementById('hero-logo');
+    if(!hero) return;
+
+    // A) Remove ANY image before the hero (except gallery thumbs)
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('img'));
+    for (var i=0;i<imgs.length;i++){
+      var img = imgs[i];
+      if (img === hero) break; // stop at the keeper
+      var src = (img.currentSrc || img.src || '').toLowerCase();
+      if (src.indexOf('/screenshots/') !== -1) continue;
+      var wrap = img.closest('a,picture,figure,header,div,section') || img;
+      if (wrap && wrap.parentNode) wrap.parentNode.removeChild(wrap);
+    }
+
+    // B) Between hero and scroller: remove any duplicates of the hero's src
+    var herosrc = (hero.currentSrc || hero.src || '').toLowerCase();
+    var scroller = document.getElementById('screenshots-strip');
+    imgs = Array.prototype.slice.call(document.querySelectorAll('img'));
+    for (i=0;i<imgs.length;i++){
+      var im = imgs[i];
+      if (im === hero) continue;
+      var s = (im.currentSrc || im.src || '').toLowerCase();
+      if (!s) continue;
+      // only consider items after hero but before scroller
+      var afterHero = !!(hero.compareDocumentPosition(im) & Node.DOCUMENT_POSITION_FOLLOWING);
+      var beforeScroller = !scroller || !!(im.compareDocumentPosition(scroller) & Node.DOCUMENT_POSITION_PRECEDING);
+      if (afterHero && beforeScroller && s === herosrc){
+        var w2 = im.closest('a,picture,figure,header,div,section') || im;
+        if (w2 && w2.parentNode) w2.parentNode.removeChild(w2);
+      }
+    }
+
+    // C) Keep only ONE Tech Support button, place it right under the hero
+    var btns = Array.prototype.slice.call(document.querySelectorAll('#btn-tech-support'));
+    if (btns.length){
+      // remove duplicates
+      for (i=1;i<btns.length;i++){
+        var w3 = btns[i].closest('.btn-support-wrap') || btns[i];
+        if (w3 && w3.parentNode) w3.parentNode.removeChild(w3);
+      }
+      var btn = btns[0];
+      var wrap = btn.closest('.btn-support-wrap') || btn;
+      // move it to directly after the hero if it isn't there already
+      if (hero.parentNode && hero.nextSibling !== wrap){
+        hero.parentNode.insertBefore(wrap, hero.nextSibling);
+      }
+      // make sure it’s centered and visible
+      wrap.style.cssText = 'width:100%;display:flex;justify-content:center;margin:12px 0 18px;';
+      btn.style.cssText += ';display:inline-block;text-align:center;';
+    }
+  }catch(e){}
+});
+</script>
