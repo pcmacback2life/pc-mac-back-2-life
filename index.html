@@ -949,32 +949,92 @@ img[src$="cta.html"] { display: none !important; }
   }catch(e){}
 })();
 </script>
-<script id="kill-old-header-logo">
+<script id="zap-old-logo">
 (function(){
-  // Prefer the explicit hero logo; fall back to the scroller iframe
-  var hero = document.getElementById('hero-logo') || document.getElementById('screenshots-strip');
-  if (!hero) return;
-
-  var imgs = Array.prototype.slice.call(document.querySelectorAll('img'));
-  for (var i=0; i<imgs.length; i++){
-    var img = imgs[i];
-
-    // Skip the new hero logo block entirely
-    if (img.closest && img.closest('#hero-logo')) continue;
-
-    // Only consider images that appear BEFORE hero in the DOM
-    // (hero follows the old header image)
-    if ((img.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING) === 0) continue;
-
-    // Skip screenshot thumbnails and the new assets/logo.png
-    var src = (img.currentSrc || img.src || '').toLowerCase();
-    if (src.indexOf('/screenshots/') !== -1) continue;
-    if (src.indexOf('assets/logo.png') !== -1) continue;
-
-    // Hide the most reasonable container so spacing collapses nicely
-    var container = (img.closest && img.closest('header, .site-header, .header, .logo, .brand, a, div, section')) || img;
-    container.style.setProperty('display','none','important');
-    break; // only the first one
+  function ready(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, {once:true});
+    else fn();
   }
+  ready(function(){
+    var anchor = document.getElementById('hero-logo') || document.getElementById('screenshots-strip');
+    if (!anchor) return;
+
+    // Only consider nodes that appear before the anchor in DOM order.
+    function isBefore(node, ref){
+      return !!(node.compareDocumentPosition(ref) & Node.DOCUMENT_POSITION_FOLLOWING);
+    }
+
+    // Returns true if this node (or its subtree) clearly belongs to screenshots strip
+    function isScreenshotish(node){
+      var s = (node.currentSrc || node.src || '').toLowerCase();
+      if (s && s.indexOf('/screenshots/') !== -1) return true;
+      // quick scan of descendant imgs
+      var imgs = node.querySelectorAll ? node.querySelectorAll('img') : [];
+      for (var i=0;i<imgs.length;i++){
+        var ss = (imgs[i].currentSrc || imgs[i].src || '').toLowerCase();
+        if (ss.indexOf('/screenshots/') !== -1) return true;
+      }
+      return false;
+    }
+
+    // We will look for the first likely logo-like element before the anchor:
+    // - <img>/<picture>/<svg>
+    // - any element with background-image
+    // and NOT our new assets/logo.png
+    function hasBgImage(el){
+      try{
+        var cs = getComputedStyle(el);
+        return cs && cs.backgroundImage && cs.backgroundImage !== 'none';
+      }catch(e){ return false; }
+    }
+
+    function isOurNewLogo(img){
+      var src = (img.currentSrc || img.src || '').toLowerCase();
+      return src.indexOf('assets/logo.png') !== -1;
+    }
+
+    var docEls = document.getElementsByTagName('*');
+    var candidate = null;
+
+    // First pass: explicit graphics tags
+    for (var i=0; i<docEls.length; i++){
+      var el = docEls[i];
+      if (el === anchor) break;                 // stop once we hit anchor
+      if (!isBefore(el, anchor)) continue;      // ensure it precedes anchor
+      if (el.closest && el.closest('#hero-logo')) continue;   // skip our new logo
+      if (isScreenshotish(el)) continue;        // skip screenshot strip bits
+
+      if (el.tagName === 'IMG') {
+        if (isOurNewLogo(el)) continue;
+        candidate = el;
+        break;
+      }
+      if (el.tagName === 'PICTURE' || el.tagName === 'SVG') {
+        candidate = el;
+        break;
+      }
+    }
+
+    // Second pass: background-image blocks (headers, brand divs, etc.)
+    if (!candidate){
+      for (var j=0; j<docEls.length; j++){
+        var el2 = docEls[j];
+        if (el2 === anchor) break;
+        if (!isBefore(el2, anchor)) continue;
+        if (el2.closest && el2.closest('#hero-logo')) continue;
+        if (isScreenshotish(el2)) continue;
+        if (hasBgImage(el2)) { candidate = el2; break; }
+      }
+    }
+
+    if (!candidate) return;
+
+    // Hide the nearest reasonable container so spacing collapses naturally
+    var container = (candidate.closest && candidate.closest(
+      'header, .site-header, .header, .masthead, .brand, .branding, .logo, .navbar, .nav, a, div, section'
+    )) || candidate;
+
+    container.style.setProperty('display','none','important');
+  });
 })();
 </script>
