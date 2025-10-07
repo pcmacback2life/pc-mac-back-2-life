@@ -942,3 +942,34 @@
   }catch(e){}
 })();
 </script>
+<script id="hide-legacy-header-logo">
+document.addEventListener('DOMContentLoaded',function(){
+  try{
+    var hero = document.getElementById('hero-logo');
+    if(!hero) return;
+    var imgs = Array.prototype.slice.call(document.images);
+    for(var i=0;i<imgs.length;i++){
+      var im = imgs[i];
+      if(im===hero) continue;
+      var src = (im.currentSrc || im.src || '').toLowerCase();
+      if(/assets\/logo\.png/i.test(src)) continue;        // your new logo
+      if(/\/screenshots\//i.test(src)) continue;          // gallery thumbs
+      // is im BEFORE hero?
+      if((hero.compareDocumentPosition(im) & Node.DOCUMENT_POSITION_FOLLOWING) === 0) continue;
+
+      // Try to hide a sensible wrapper; else hide the img
+      var node = im, steps = 0;
+      while(node && node.tagName !== 'BODY' && steps++ < 6){
+        if(/^(A|PICTURE|FIGURE|DIV|SPAN|HEADER)$/i.test(node.tagName) &&
+           node.querySelectorAll('img').length <= 2){
+          node.style.display = 'none';
+          return;
+        }
+        node = node.parentElement;
+      }
+      im.style.display = 'none';
+      return;
+    }
+  }catch(e){}
+});
+</script>
